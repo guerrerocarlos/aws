@@ -3,7 +3,7 @@
 <head>
     <style>
         body {
-            background-color: black;
+            background-color: #1b242f;
         }
     </style>
     <title ng-non-bindable="">New Tab</title>
@@ -28,7 +28,7 @@
         #awsgnav #awsc-rg-error:before,
         .awsc-footer-icon,
         .awsc-service-icon {
-            opacity: 0.5;
+            opacity: 1;
         }
     </style>
 
@@ -94,6 +94,7 @@
 
         #h #awsgnav #nav-menubar {
             margin: 0 0 0px;
+            opacity: 0.8;
         }
 
         .nav-menu-content {
@@ -132,7 +133,7 @@
     <style>
         .backphoto {
             top: 0;
-            position: fixed; 
+            position: fixed;
             /* right: 0; */
             /* position: sticky; */
             /* background-attachment: scroll; */
@@ -143,7 +144,7 @@
 </head>
 
 <body class="awsui-mezzanine-overrides user-type-iam awsc-language-select-footer" data-aws-proxy-region="null">
-    <img id="photo" class="backphoto" src="" />
+    <img id="photo" style="opacity: 0;" class="backphoto" src="" />
 
     <div id="b">
         <!-- Adding the ng-non-bindable directive to prevent any Angular expressions that may be present in the header or footer from being evaulated -->
@@ -3379,12 +3380,23 @@
         // height = document.getElementById("awsc-services-container").clientWidth
         document.getElementById("photo").src = `https://source.unsplash.com/random/${width}x${height}`
 
+        let images = document.getElementsByTagName("img");
+        for (let image of images) {
+            image.addEventListener("load", fadeImg);
+            image.style.opacity = "0";
+        }
+
+        function fadeImg() {
+            this.style.transition = "opacity 2s";
+            this.style.opacity = "1";
+        }
+
 	// ]]>
     </script>
     <style>
-        body {
+        /* body {
             background-color: black;
-        }
+        } */
     </style>
 
     <!-- Code injected by live-server -->
